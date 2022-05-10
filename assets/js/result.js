@@ -55,6 +55,12 @@ body["backgroundAttachment"] = "fixed";
 body["backgroundPosition"] = "center";
 body["backgroundSize"] = "100% 100%"
 
+var img = document.createElement('img')
+// img.src = resource[1]
+img.sizes = "100% 100%"
+img.css = "display:none"
+document.body.appendChild(img)
+
 function longPress(func) {
     var timeOutEvent;
 
@@ -64,7 +70,7 @@ function longPress(func) {
         //开启延时定时器
         timeOutEvent = setTimeout(function () {
             //调用长按之后的逻辑函数func
-            func();
+            saveSharePic();
         }, 300); //长按时间为300ms，可以自己设置
     });
 
@@ -81,43 +87,38 @@ function longPress(func) {
 }
 
 //保存图片
+
 function saveSharePic() {
-    // 想要保存的图片节点
-    var img_url = resource[1]
-    const dom = document.createElement('img');
-    dom.width = 0;
-    dom.src = img_url;
-    document.body.appendChild(dom)
+    function creatImg() {
+        const dom = document.body;
+        const box = window.getComputedStyle(dom);
+        // DOM 节点计算后宽高
+        const width = this.parseValue(box.width);
+        const height = this.parseValue(box.height);
+        // 获取像素比
+        const scaleBy = DPR();
+        // 创建自定义 canvas 元素
+        var canvas = document.createElement('canvas');
+        // 设定 canvas 元素属性宽高为 DOM 节点宽高 * 像素比
+        canvas.width = width * scaleBy;
+        canvas.height = height * scaleBy;
+        // 设定 canvas css宽高为 DOM 节点宽高
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        let x = width;
+        let y = height;
+        html2canvas(dom, {canvas,
+            dpi: 350,
+        }).then(function () {
+            document.getElementsByTagName('img').src = canvas.toDataURL("image/png"); //生成的图片链接
+        })
+    }
 
-    // 创建一个新的canvas
-    const canvas = document.createElement("canvas");
-    const width = document.body.offsetWidth; // 可见屏幕的宽
-    const height = document.body.offsetHeight; // 可见屏幕的高
-
-    const scale = window.devicePixelRatio; // 设备的devicePixelRatio
-    // 将Canvas画布放大scale倍，然后放在小的屏幕里，解决模糊问题
-    canvas.width = width * scale;
-    canvas.height = height * scale;
-    console.log("canvas宽高：" + canvas.width + "、" + canvas.height);
-    canvas.getContext('2d').scale(scale, scale);
-    // dom节点绘制成canvas
-    html2canvas(dom).then(function (canvas) {
-        const img = canvas2Image(canvas, canvas.width, canvas.height);
-        img.style.cssText = "width:100%;position:absolute;top:0;left:0;opacity:0;z-index:999;";
-        console.log("图片宽高：" + img.width + "、" + img.height);
-        document.body.appendChild(img);
-    });
-    return true
+    function DPR() {
+        if (window.devicePixelRatio && window.devicePixelRatio > 1) {
+            return window.devicePixelRatio;
+        }
+        return 1;
+    }
 }
 
-//利用canvas获取图片的base64编码创建图片对象
-function canvas2Image(canvas, width, height) {
-    const retCanvas = document.createElement("canvas");
-    const retCtx = retCanvas.getContext("2d");
-    retCanvas.width = width;
-    retCanvas.height = height;
-    retCtx.drawImage(canvas, 0, 0, width, height, 0, 0, width, height);
-    const img = document.createElement("img");
-    img.src = retCanvas.toDataURL("image/png", 1); // 可以根据需要更改格式
-    return img;
-}
