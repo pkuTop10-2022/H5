@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>测测你的音乐星球</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+<link rel="stylesheet" type="text/css" href="assets/css/css.css">
+<!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+
+<script type="text/javascript" src="assets/js/rem.js" ></script>
+<script type="text/javascript" src="assets/js/jquery-3.6.0.min.js"></script>
+</head>
+<body class="start">
+
+<div class='entrance-bottom-frame-start-button' onclick="location.href='test.html'">
+    开始答题
+</div>
+<script type="text/javascript">
+    var button = document.getElementsByClassName("entrance-bottom-frame-start-button")
+    var w = window.screen.availWidth;
+    var h = window.screen.availHeight;
+    $(button).css('top', h*0.65);
+</script>
+</body>
+</html>
