@@ -73,7 +73,13 @@
     background: #f86d07;
     color: #f7f7f7;
     border-radius: 0.54rem;padding: 0 0.5rem;
-    display: inline-block;
+    display: inline-flex;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
 }.entrance-bottom-frame-start-button:active{
      transform: scale(0.9);
      box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
@@ -81,6 +87,7 @@
 .entrance-bottom-frame-start-button:hover{color: white; background: royalblue;}
 body{
     text-align: center;
+    overflow: hidden;
 }
 .start{
     background: url('../img/start.jpg') no-repeat fixed center;
@@ -93,4 +100,8 @@ body{
 audio{
      display: table-cell;
     vertical-align: middle;
+}
+img{
+    width: auto;
+    position: center;
 }

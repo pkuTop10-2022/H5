@@ -48,17 +48,16 @@ function returnresource(res){
 resource = returnresource(res);
 document.title = resource[0] + " - 测测你的星球属性";
 
-var body = document.body.style;
-body["backgroundImage"] = "url('" + resource[1] + "')";
-body["backgroundRepeat"] = "no-repeat";
-body["backgroundAttachment"] = "fixed";
-body["backgroundPosition"] = "center";
-body["backgroundSize"] = "100% 100%"
+// var body = document.body.style;
+// body["backgroundImage"] = "url('" + resource[1] + "')";
+// body["backgroundRepeat"] = "no-repeat";
+// body["backgroundAttachment"] = "fixed";
+// body["backgroundPosition"] = "center";
+// body["backgroundSize"] = "100% 100%"
 
 var img = document.createElement('img')
-// img.src = resource[1]
-img.sizes = "100% 100%"
-img.css = "display:none"
+img.src = resource[1];
+img.height = window.screen.availHeight;
 document.body.appendChild(img)
 
 function longPress(func) {
