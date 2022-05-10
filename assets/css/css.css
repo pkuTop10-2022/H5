@@ -89,17 +89,7 @@ body{
 }.answer{
     background: url("../img/answer.png") no-repeat fixed center;
      background-size:100% 100%;
-}.b612{
-    background: url("../img/b612.jpg") no-repeat fixed center;
-      background-size:100% 100%;
 }
-.halei{background: url("../img/halei.png") no-repeat fixed center;background-size:100% 100%;}
-.heidong{background: url("../img/heidong.png") no-repeat fixed center;background-size:100% 100%;}
-.kaipule{
-
-}.taiyang{
-    background: url("../img/taiyang.png") no-repeat fixed center;background-size:100% 100%;
-      }
 
 audio{
      display: table-cell;
